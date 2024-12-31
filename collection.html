@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadNow - Collections</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ffc743; /* Warm orange for primary */
+            --primary-hover: #f4c21e; /* Darker orange for hover */
+            --text-primary: #2c3e50; /* Dark blue-gray for primary text */
+            --text-secondary: #7f8c8d; /* Soft gray for secondary text */
+            --background: #fafafa; /* Off-white background */
+            --background-secondary: #ffffff; /* Clean white for cards */
+            --category-background: #fff3e0; /* Light orange for category background */
+            --category-hover: #ffcc80; /* Lighter orange for hover effect */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--background);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #000000;
+            letter-spacing: 1px;
+        }
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(243, 162, 34, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #000000;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #fafafa;
+        }
+
+        .nav-links a.active {
+            color: #000000;
+        }
+
+        /* Collections Section */
+        .collections {
+            padding: 4rem 2rem;
+            background: var(--background);
+            text-align: center;
+        }
+
+        .collections h2 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .collections p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .collection-card {
+            background: var(--category-background);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .collection-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: var(--category-hover);
+        }
+
+        .collection-card h3 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .collection-card p {
+            color: var(--text-secondary);
+        }
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            background: var(--background);
+            margin-top: 4rem;
+            color: var(--text-secondary);
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                background: var(--background-secondary);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem;
+            }}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ReadNow</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="book.html">Books</a></li>
+                <li><a href="collections.html" class="active">Collections</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="collections">
+        <h2>Our Collections</h2>
+        <p>Explore curated collections of books tailored to your interests.</p>
+        <div class="collections-grid">
+            <div class="collection-card">
+                <h3>Classic Literature</h3>
+                <p>A collection of timeless classics.</p>
+            </div>
+            <div class="collection-card">
+                <h3>Modern Bestsellers</h3>
+                <p>Discover today's most popular reads.</p>
+            </div>
+            <div class="collection-card">
+                <h3>Children's Favorites</h3>
+                <p>Engaging books for young readers.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ReadNow. All rights reserved.</p>
+    </footer>
+    <script>
+          const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

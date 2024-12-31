@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadNow - Cart</title>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 2rem;
+        }
+        .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(243, 162, 34, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #000000;
+            letter-spacing: 1px;
+        }
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #ddd;
+}
+
+.nav-links a.active {
+    color: #171616;
+}
+        /* Cart Section */
+        .cart-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .cart-table th, .cart-table td {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .total {
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-top: 1rem;
+        }
+        .button {
+            padding: 0.5rem 1rem;
+            background: rgba(243, 162, 34, 0.9);
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+        }
+        .button:hover {
+            background: #e3e30b;
+        }
+        .actions {
+            margin-top: 1rem;
+        }
+        /* Mobile Menu Styles */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: white;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ReadNow</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="book.html">Books</a></li>
+                <li><a href="collections.html">Collections</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="cart-section">
+        <h2>Your Cart</h2>
+        <table class="cart-table" id="cart-table">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items"></tbody>
+        </table>
+        <div class="total" id="cart-total">Total: $0.00</div>
+        <div class="actions">
+            <button id="checkout-button" class="button"><a href="payment.html">Checkout</a></button>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart();
+
+            // Function to load the cart items from localStorage
+            function loadCart() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const cartItemsElement = document.getElementById('cart-items');
+                const cartTotalElement = document.getElementById('cart-total');
+                let total = 0;
+
+                // Clear previous content
+                cartItemsElement.innerHTML = "";
+
+                // Build table rows dynamically
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+
+                    cartItemsElement.innerHTML += `
+                        <tr>
+                            <td>${item.name}</td>
+                            <td>$${item.price.toFixed(2)}</td>
+                            <td>${item.quantity}</td>
+                            <td>$${itemTotal.toFixed(2)}</td>
+                        </tr>
+                    `;
+                });
+
+                // Update the total price
+                cartTotalElement.innerText = `Total: $${total.toFixed(2)}`;
+            }
+
+            // // Checkout button functionality
+            // document.getElementById('checkout-button').addEventListener('click', () => {
+            //     const total = parseFloat(document.getElementById('cart-total').innerText.replace('Total: $', ''));
+            //     alert(`Your total is $${total.toFixed(2)}. Proceeding to checkout...`);
+                // Implement your checkout logic here
+            // });
+        });
+    </script>
+</body>
+</html>

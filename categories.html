@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReadNow - Categories</title>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            color: #1f2937;
+            background-color: #ffffff;
+            margin: 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #000000;
+            letter-spacing: 1px;
+        }
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(243, 162, 34, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff; /* Warm orange for hover */
+        }
+
+        .nav-links a.active {
+            color: #010101; /* Warm orange for active link */
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 8rem 2rem 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .categories h2 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: #1f2937;
+        }
+
+        .categories ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .categories ul li {
+            margin: 0;
+        }
+
+        .category-card {
+            background-color: #ffd943; /* Warm orange */
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            background-color: #efd45b; /* Darker orange on hover */
+        }
+
+        .category-card a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .category-card a:hover {
+            color: #e1ba7f; /* Lighter orange on hover */
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            background: #f9fafb;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                background: var(--background-secondary);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem;
+            }}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ReadNow</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="book.html">Books</a></li>
+                <li><a href="collection.html">Collections</a></li>
+                <li><a href="categories.html" class="active">Categories</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="categories">
+        <h2>Book Categories</h2>
+        <ul>
+            <li>
+                <div class="category-card">
+                    <a href="book.html?category=Fiction">Fiction</a>
+                </div>
+            </li>
+            <li>
+                <div class="category-card">
+                    <a href="book.html?category=Non-Fiction">Non-Fiction</a>
+                </div>
+            </li>
+            <li>
+                <div class="category-card">
+                    <a href="book.html?category=Children">Children's Books</a>
+                </div>
+            </li>
+            <li>
+                <div class="category-card">
+                    <a href="book.html?category=Biography">Biography</a>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ReadNow. All rights reserved.</p>
+    </footer>
+    <script>  const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });</script>
+</body>
+</html>
