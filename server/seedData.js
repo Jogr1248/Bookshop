@@ -1,12 +1,9 @@
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-import Book from './models/Book.js'
-import User from './models/User.js'
-
-dotenv.config()
+import fs from 'fs'
+import path from 'path'
 
 const sampleBooks = [
   {
+    id: '1',
     title: "The Great Adventure",
     author: "John Smith",
     description: "An epic tale of courage and discovery in uncharted territories.",
@@ -19,6 +16,7 @@ const sampleBooks = [
     featured: true
   },
   {
+    id: '2',
     title: "The Lost Kingdom",
     author: "Sarah Johnson",
     description: "A mystical journey through ancient lands filled with magic and wonder.",
@@ -31,6 +29,7 @@ const sampleBooks = [
     featured: true
   },
   {
+    id: '3',
     title: "Sapiens: A Brief History of Humankind",
     author: "Yuval Noah Harari",
     description: "A fascinating exploration of human history and our species' journey.",
@@ -43,6 +42,7 @@ const sampleBooks = [
     featured: true
   },
   {
+    id: '4',
     title: "Educated: A Memoir",
     author: "Tara Westover",
     description: "A powerful memoir about education, family, and the struggle for self-invention.",
@@ -55,6 +55,7 @@ const sampleBooks = [
     featured: true
   },
   {
+    id: '5',
     title: "Adventures in Rainbow Land",
     author: "Lucy Harper",
     description: "A colorful adventure story perfect for young readers.",
@@ -67,6 +68,7 @@ const sampleBooks = [
     featured: false
   },
   {
+    id: '6',
     title: "The Journey of Elon Musk",
     author: "Mark Peterson",
     description: "An inspiring biography of one of the most innovative entrepreneurs of our time.",
@@ -79,6 +81,7 @@ const sampleBooks = [
     featured: false
   },
   {
+    id: '7',
     title: "Galaxy Wars",
     author: "Arthur Clarke",
     description: "An epic space opera spanning galaxies and civilizations.",
@@ -91,6 +94,7 @@ const sampleBooks = [
     featured: true
   },
   {
+    id: '8',
     title: "Mystical Tales",
     author: "Rebecca Hayes",
     description: "A collection of enchanting stories from mystical realms.",
@@ -104,40 +108,45 @@ const sampleBooks = [
   }
 ]
 
+const sampleUsers = [
+  {
+    id: '1',
+    name: 'Admin User',
+    email: 'admin@readnow.com',
+    password: 'admin123',
+    role: 'admin'
+  },
+  {
+    id: '2',
+    name: 'John Doe',
+    email: 'user@readnow.com',
+    password: 'user123',
+    role: 'user'
+  }
+]
+
 const seedDatabase = async () => {
   try {
-    // Connect to MongoDB
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/readnow-bookshop')
-    console.log('Connected to MongoDB')
+    // Create data directory if it doesn't exist
+    const dataDir = path.join(process.cwd(), 'server', 'data')
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true })
+    }
 
-    // Clear existing data
-    await Book.deleteMany({})
-    await User.deleteMany({})
-    console.log('Cleared existing data')
+    // Write books data to JSON file
+    const booksPath = path.join(dataDir, 'books.json')
+    fs.writeFileSync(booksPath, JSON.stringify(sampleBooks, null, 2))
+    console.log('Created books data file')
 
-    // Create admin user
-    const adminUser = new User({
-      name: 'Admin User',
-      email: 'admin@readnow.com',
-      password: 'admin123',
-      role: 'admin'
-    })
-    await adminUser.save()
-    console.log('Created admin user')
+    // Write users data to JSON file
+    const usersPath = path.join(dataDir, 'users.json')
+    fs.writeFileSync(usersPath, JSON.stringify(sampleUsers, null, 2))
+    console.log('Created users data file')
 
-    // Create sample user
-    const sampleUser = new User({
-      name: 'John Doe',
-      email: 'user@readnow.com',
-      password: 'user123',
-      role: 'user'
-    })
-    await sampleUser.save()
-    console.log('Created sample user')
-
-    // Insert sample books
-    await Book.insertMany(sampleBooks)
-    console.log('Inserted sample books')
+    // Create empty orders file
+    const ordersPath = path.join(dataDir, 'orders.json')
+    fs.writeFileSync(ordersPath, JSON.stringify([], null, 2))
+    console.log('Created orders data file')
 
     console.log('Database seeded successfully!')
     console.log('Admin credentials: admin@readnow.com / admin123')
